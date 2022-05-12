@@ -1,0 +1,37 @@
+<!--
+ * @Author: changluo
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="root"></h1>
+    <script>
+        window.requestAnimationFrame = window.requestAnimationFrame || function (callback) {
+            window.setTimeout(callback, 1000 / 60)
+        }
+        let fps = 0;
+        let previous = Date.now();
+        function step() {
+            fps++
+            let now = Date.now()
+            if (now - previous >= 1000) {
+                console.log('fps', fps);
+                document.getElementById('root').innerHTML = fps + ''
+                fps = 0;
+                previous = now
+            }
+            requestAnimationFrame(step)
+        }
+        step()
+    </script>
+</body>
+
+</html>

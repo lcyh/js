@@ -1,0 +1,207 @@
+{
+    "code": 0,
+    "message": null,
+    "data": [
+        {
+            "menuId": 2,
+            "parentId": 0,
+            "url": "",
+            "name": "数据看板",
+            "type": 1,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": "Databoard"
+        },
+        {
+            "menuId": 26,
+            "parentId": 0,
+            "url": "",
+            "name": "预测工具",
+            "type": 1,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": "Forecast"
+        },
+        {
+            "menuId": 34,
+            "parentId": 0,
+            "url": "",
+            "name": "即席查询",
+            "type": 1,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": ""
+        },
+        {
+            "menuId": 37,
+            "parentId": 0,
+            "url": "",
+            "name": "行为分析",
+            "type": 1,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": "Behavior"
+        },
+        {
+            "menuId": 53,
+            "parentId": 0,
+            "url": "",
+            "name": "用户资产",
+            "type": 1,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": "Dmp"
+        },
+        {
+            "menuId": 15,
+            "parentId": 2,
+            "url": "",
+            "name": "运营",
+            "type": 2,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": ""
+        },
+        {
+            "menuId": 16,
+            "parentId": 2,
+            "url": "",
+            "name": "研发",
+            "type": 2,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": ""
+        },
+        {
+            "menuId": 17,
+            "parentId": 2,
+            "url": "",
+            "name": "流量",
+            "type": 2,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": ""
+        },
+        {
+            "menuId": 35,
+            "parentId": 34,
+            "url": "",
+            "name": "OLAP(国内)",
+            "type": 2,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": ""
+        },
+        {
+            "menuId": 36,
+            "parentId": 34,
+            "url": "",
+            "name": "OLAP(国外)",
+            "type": 2,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": ""
+        },
+        {
+            "menuId": 38,
+            "parentId": 37,
+            "url": "",
+            "name": "BI(国内)",
+            "type": 2,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": ""
+        },
+        {
+            "menuId": 39,
+            "parentId": 37,
+            "url": "",
+            "name": "BI(国外)",
+            "type": 2,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": ""
+        },
+        {
+            "menuId": 42,
+            "parentId": 37,
+            "url": "/behavior/funnelAnalysis",
+            "name": "漏斗分析",
+            "type": 2,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": "FunnelAnalysis"
+        },
+        {
+            "menuId": 44,
+            "parentId": 2,
+            "url": "",
+            "name": "专题",
+            "type": 2,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": ""
+        },
+        {
+            "menuId": 54,
+            "parentId": 53,
+            "url": "/dmp/Layout",
+            "name": "用户资产",
+            "type": 2,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": ""
+        },
+        {
+            "menuId": 5,
+            "parentId": 15,
+            "url": "/databoard/overview",
+            "name": "数据概览",
+            "type": 3,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": "Overview"
+        },
+        {
+            "menuId": 6,
+            "parentId": 15,
+            "url": "/databoard/realtime",
+            "name": "实时看板",
+            "type": 3,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": "RealTime"
+        },
+        {
+            "menuId": 55,
+            "parentId": 54,
+            "url": "/dmp/Crowd",
+            "name": "人群管理",
+            "type": 3,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": "Crowd"
+        },
+        {
+            "menuId": 56,
+            "parentId": 54,
+            "url": "/dmp/Protrait",
+            "name": "用户画像 ",
+            "type": 3,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": "Portrait"
+        },
+        {
+            "menuId": 57,
+            "parentId": 54,
+            "url": "/dmp/newPopulation",
+            "name": "新建人群",
+            "type": 3,
+            "reportUrl": "",
+            "havePermission": 1,
+            "componentName": "NewPopulation"
+        }
+    ]
+}
+

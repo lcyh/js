@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>截流防抖</title>
+</head>
+
+<body>
+    <div>
+        <h1>防抖截流</h1>
+        <div style="width:100%;height:100%;border:1px solid #000;">
+            <div id="content" style="width:100%;height:200px;font-size: 20px;"></div>
+        </div>
+        <button id="button">点击</button>
+    </div>
+    <script>
+        // 注意设置的时候最好不要同时将 leading 或 trailing 设置为 false。
+        // 截流
+        function throttleFn(func, wait, options = { leading: true, trailing: true }) {
+            let previous = 0, timeout = null, args, context;
+
+            const later = () => {
+                previous = options.leading === false ? 0 : Date.now()
+                func.apply(null, args);
+                timeout = null;
+            }
+            const throttled = function () {
+                args = arguments;
+                context = this;
+                let now = Date.now()
+                if (!previous && options.leading === false) previous = now;
+                let remaining = wait - (now - previous);
+                // 第一次立即执行,超过 wait时间间隔
+                if (remaining <= 0) {
+                    if (timeout) {
+                        clearTimeout(timeout)
+                        timeout = null
+                    }
+                    func.apply(null, args);
+                    previous = now;
+
+                } else if (!timeout && options.trailing !== false) {
+                    // remaining >0,最后一次执行
+                    timeout = setTimeout(later, remaining)
+                }
+            }
+            throttled.cancle = function(){
+                clearTimeout(timeout)
+                timeout = null;
+                previous = 0;
+            }
+
+            return throttled
+        }
+        let count = 0;
+        function handleUpdate(event) {
+            console.log('event', event);
+            document.getElementById('content').innerText = ++count;
+        }
+        button.addEventListener('click', throttleFn(handleUpdate, 2000, { leading: true, trailing: true }))
+    </script>
+</body>
+
+</html>

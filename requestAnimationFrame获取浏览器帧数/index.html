@@ -1,0 +1,52 @@
+<!--
+ * @Author: changluo
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        var showFPS = (function () {
+            var requestAnimationFrame =
+                window.requestAnimationFrame || function (callback) { //Fallback function 
+                    window.setTimeout(callback, 1000 / 60);
+                };
+            let fps = 0;
+            let offset = 0;
+            let previous = Date.now();
+
+            const step = function () {      
+                let now = Date.now()
+                offset = now - previous;
+                fps += 1;
+                if (offset >= 1000) {
+                    previous = now;
+                    console.log('fps', fps);
+                    // appendFps(fps);
+                    // fps = 0;
+                }
+                requestAnimationFrame(step);
+            };
+            //显示fps
+            const appendFps = function (fps) {
+                let root = document.getElementById('root');
+                root.innerHTML = "fps: " + fps;
+            }
+            return {
+                go: function () { step(); }
+            }
+        })();
+        // 调用
+        showFPS.go()
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "title": "json-server",
+            "author": "typicode"
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "body": "some comment",
+            "postId": 1
+        }
+    ],
+    "profile": {
+        "code": 0,
+        "data": {
+            "name": "typicode",
+            "id": 123,
+            "hobby": "eat",
+            "school":"北大清华",
+            "list": []
+        }
+    }
+}

@@ -1,0 +1,42 @@
+<!--
+ * @Author: changluo
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let canvas = document.createElement('canvas')
+        canvas.id = '__canvas'
+        canvas.width = '180' ;// 每个水印的宽高
+        canvas.height = '150';
+        let ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'rgba(150, 150, 150, 0.5)';
+        ctx.rotate((25 * Math.PI) / 180); // 偏转的角度
+        ctx.fillText('originDu', 30, 20);  // 绘制文本 绘制开始位置
+
+        let src = canvas.toDataURL('image/png');
+
+        // 水印容器
+        let waterMaskdiv = document.createElement('div');
+
+        waterMaskDiv.style.position = 'fixed'
+        waterMaskDiv.style.zIndex = '-1'
+        waterMaskDiv.id = '__water-mark'
+        waterMaskDiv.style.top = '0'
+        waterMaskDiv.style.left = '0'
+        waterMaskDiv.style.height = '100%'
+        waterMaskDiv.style.width = '100%'
+        waterMaskDiv.style.pointerEvents = 'none'
+        waterMaskDiv.style.backgroundImage = 'url(' + src + ')'
+        // 水印节点插到body下 可以通过层级控制节点层次
+        document.body.appendChild(waterMaskDiv)
+
+    </script>
+</body>
+</html>

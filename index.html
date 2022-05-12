@@ -1,0 +1,80 @@
+<!--
+ * @Author: changluo
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let obj = {
+            name: 'Colin',
+            age: 20,
+            intresting: {
+                name: 'eating',
+                title: '吃饭'
+            },
+            list: [
+                { id: 1, title: 'hello' },
+                { id: 2, title: 'world' },
+                {
+                    id: 3,
+                    title: '对象',
+                    hobby: {
+                        name: 'play',
+                        id: 4,
+                        title: '玩'
+                    }
+                }
+            ]
+        }
+        // let arr = ['name', 'age', { id: 1, title: 'haha', hobby: { name: '旅游' } }];
+        // function isObject(obj) {
+        //     return typeof obj === 'object';
+        // }
+        /**
+         * WeakMap:
+         * 1.只接受对象作为键名（null除外),不接受其他类型的值作为键名,它的key的引用是弱引用
+         * 2.一旦消除对该节点的引用，它占用的内存就会被垃圾回收机制释放。Weakmap 保存的这个键值对，也会自动消失。
+        */
+        function deepClone(obj, hash = new WeakMap()) {
+            if (typeof obj !== 'object' || typeof obj === null) return obj; // 判断是否是 object,这里和第47行 判断只需要其一就行了
+            let Constructor = obj.constructor;
+            let result = new Constructor();
+            switch (Constructor) {
+                case RegExp:
+                    result = new Constructor(obj);
+                    return result;
+                case Date:
+                    result = new Constructor(obj.getTime());
+                    return result;
+                default:
+                    break;
+            }
+            if (hash.has(obj)) return hash.get(obj);
+            hash.set(obj, result);
+
+            for (let key in obj) {
+                // hasOwnProperty只枚举对象自身的属性,不会遍历原型上的属性
+                if (obj.hasOwnProperty(key)) {
+                    // result[key] = isObject(obj[key]) ? deepClone(obj[key], hash) : obj[key]; // 判断是否是 object
+                    result[key] = deepClone(obj[key], hash);
+                }
+            }
+            return result;
+        }
+        obj.obj = obj; // 循环引用
+        let o1 = deepClone(obj);
+        o1.list[0].title = 'lc';
+        console.log('deepClone-o1', o1);
+        console.log('obj', obj);
+    </script>
+</body>
+
+</html>

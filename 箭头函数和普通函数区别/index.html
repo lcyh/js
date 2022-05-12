@@ -1,0 +1,30 @@
+<!--
+ * @Author: changluo
+ * @Description: 
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = 10;
+        var obj = {
+            a: 30,
+            say: () => {
+                console.log('say', this.a);
+            }
+        }
+        console.log(obj.say()); // 10
+        var otherObj = { a: 20 }
+        console.log('obj.say.apply(otherObj)', obj.say.apply(otherObj)); // 10
+    </script>
+</body>
+
+</html>

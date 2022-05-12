@@ -1,0 +1,30 @@
+<!--
+ * @Author: changluo
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        window.name = 'hello'
+        function A() {
+            this.name = 'aa'
+        }
+        A.prototype.getA = function () {
+            console.log('this', this);
+            return this.name;
+        }
+        let ins = new A()
+        let fn = ins.getA;
+        fn()
+    </script>
+</body>
+
+</html>

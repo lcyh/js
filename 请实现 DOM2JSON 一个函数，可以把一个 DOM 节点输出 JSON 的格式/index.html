@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>请实现 DOM2JSON 一个函数，可以把一个 DOM 节点输出 JSON 的格式</title>
+</head>
+<body>
+  <h3>DOM-to-JSON</h3>
+  <div id='root'>
+    <span>
+      <a></a>
+    </span>
+    <span>
+      <a></a>
+      <a></a>
+    </span>
+  </div>
+  <script>
+    /*
+    把上面dom结构转成下面的JSON格式
+    {
+      tag: 'DIV',
+        children: [
+          {
+            tag: 'SPAN',
+            children: [
+              { tag: 'A', children: [] }
+            ]
+          },
+          {
+            tag: 'SPAN',
+            children: [
+              { tag: 'A', children: [] },
+              { tag: 'A', children: [] }
+            ]
+          }
+        ]
+    }
+    */
+    let rootNode = document.getElementById('root');
+    function domToJson(rootNode) {
+      let obj = {};
+      obj.tag = rootNode.tagName;
+      obj.children = [];
+      rootNode.childNodes.forEach(child => {
+        if(child.tagName){
+          obj.children.push(domToJson(child));
+        }
+      });
+      return obj;
+    }
+    console.log(JSON.stringify(domToJson(rootNode),null,2));;
+  </script>
+</body>
+
+</html>

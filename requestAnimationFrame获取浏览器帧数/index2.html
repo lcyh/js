@@ -1,0 +1,40 @@
+<!--
+ * @Author: changluo
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    function getFps() {
+        let requestAnimationFrame = window.requestAnimationFrame || function (callback) {
+            window.setTimeout(callback, 1000 / 60)
+        }
+        let previous = Date.now();
+        let fps = 0;
+        const step = function () {
+            let now = Date.now();
+            fps++
+            if ((now - previous) >= 1000) {
+                root.innerHTML = fps;
+                console.log('fps', fps);
+                fps = 0;
+                previous = now
+            }
+            requestAnimationFrame(step)
+        }
+        step()
+    }
+    getFps()
+</script>
+
+</html>
