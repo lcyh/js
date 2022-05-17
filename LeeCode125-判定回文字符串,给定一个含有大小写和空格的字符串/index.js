@@ -15,7 +15,8 @@
 输入: "ab_a"
 输出: true
  */
-
+let s = "A man, a plan, _a canal: Panama".replace(/\W/g, '').replace('_', '');
+console.log('s', s);
 
 var isPalindrome = function (s) {
     const reg = /\W/g

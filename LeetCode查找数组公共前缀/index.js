@@ -45,13 +45,11 @@ function fn(arr) {
     const list = [...arr]
     const first = list.shift();
     let curStr = '';
-    let longestStr = ''
     for (let i = 0; i < first.length; i++) {
         curStr = curStr + first[i]
         for (let j = 0; j < list.length; j++) {
             if (!list[j].startsWith(curStr)) {
-                longestStr = first.slice(0, i)
-                return longestStr
+                return first.slice(0, i)
             }
         }
     }

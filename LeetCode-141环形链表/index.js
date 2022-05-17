@@ -24,7 +24,7 @@ function cycleList(head) {
     if (head === null) return false
     let slow = head
     let fast = head
-    while (fast !== null) {
+    while (fast.next !== null && fast.next.next !== null) {
         slow = slow.next
         fast = fast.next.next
         if (slow === fast) {
@@ -33,26 +33,9 @@ function cycleList(head) {
     }
     return false
 }
-// console.log('isPalindrome', isPalindrome(root));
+// console.log('cycleList', cycleList(root));
 
 
-// go() // 'go'
-// go()('l') // 'gool'
-// go()()('l') // 'goool'
-function go(str, s = 'go') {
-    if (!str) {
-        return s + str;
-    }
-    function addO(str1) {
-        if (!str1) {
-            s = s + 'o'
-            return go(s)
-        } else {
-            return s + str1;
-        }
-    }
-    return addO
-}
-console.log('go', go()('l'));
+
 
 

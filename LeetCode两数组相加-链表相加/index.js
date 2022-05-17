@@ -61,13 +61,13 @@ function ListNode(val, next) {
     this.next = (next === undefined ? null : next)
 }
 var addTwoNumbers = function (l1, l2) {
-    let root = new ListNode();
-    let cur = root;
+    let dummy = new ListNode();
+    let cur = dummy;
     let carry = 0;
     let sum = 0;
     while (l1 !== null || l2 !== null || carry !== 0) {
-        l1Val = l1?.val || 0
-        l2Val = l2?.val || 0
+        let l1Val = l1?.val || 0
+        let l2Val = l2?.val || 0
         sum = l1Val + l2Val + carry;
         carry = Math.floor(sum / 10);
         cur.next = new ListNode(sum % 10);
@@ -75,7 +75,7 @@ var addTwoNumbers = function (l1, l2) {
         if (l1 !== null) l1 = l1.next
         if (l2 !== null) l2 = l2.next
     }
-    return root.next
+    return dummy.next
 };
 // console.log('addTwoNumbers', JSON.stringify(addTwoNumbers(l1, l2), null, 2));
 

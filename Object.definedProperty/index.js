@@ -12,7 +12,7 @@ let obj = {
     }
 }
 function observer(obj) {
-    if (typeof obj !== 'object') return obj;
+    if (typeof obj !== 'object' || obj === null) return obj;
     Object.keys(obj).forEach((key) => {
         defineReactive(obj, key, obj[key]);
     })

@@ -20,12 +20,12 @@
 function Freeze(obj) {
     const recurion = (obj) => {
         Object.freeze(obj)
-        Object.keys(obj).forEach((key)=>{
-            if(
-                obj[key] !== null && 
-                (typeof obj[key] === 'object' || typeof obj[key] === 'function') && 
+        Object.keys(obj).forEach((key) => {
+            if (
+                obj[key] !== null &&
+                (typeof obj[key] === 'object' || typeof obj[key] === 'function') &&
                 !Object.isFrozen(obj[key])
-            ){
+            ) {
                 recurion(obj[key])
             }
         })
@@ -36,3 +36,16 @@ const obj = { name: '蟹黄', address: { email: '123@qq.com' } };
 Freeze(obj)
 obj.name = '同学';// 如果被冻结了就不能set
 console.log(obj.name);//蟹黄
+
+
+
+const obj = {
+    name: 'lc',
+    age: 12,
+    adress: {
+        email: '123@qq.com'
+    }
+}
+for (let k in obj) {
+    console.log('k', k, obj[k]);
+}

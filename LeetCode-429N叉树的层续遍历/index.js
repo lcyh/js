@@ -47,13 +47,13 @@ const levelOrder = (root) => {
     const res = [];
     const stack = [];
     stack.push(root)
-    while(stack.length){
+    while (stack.length) {
         const levelSize = stack.length;
         const arr = [];
-        for(let i = 0;i<levelSize;i++){
+        for (let i = 0; i < levelSize; i++) {
             const node = stack.shift();
             arr.push(node.val)
-            if(node.children.length){
+            if (node.children.length) {
                 stack.push(...node.children);
             }
         }
@@ -61,28 +61,8 @@ const levelOrder = (root) => {
     }
     return res;
 }
-console.log('levelOrder', levelOrder(root));
+// console.log('levelOrder', levelOrder(root));
 
 
-const levelOrder1 = (root)=>{
-    if(root === null) return []
-    const res = []
-    const stack = []
-    stack.push(root)
-    while(stack.length){
-        const levelSize = stack.length;
-        const arr = [];
-        for(let i=0;i<levelSize;i++){
-            const node = stack.shift();
-            arr.push(node.val);
-            if(node.children.length){
-                stack.push(...node.children)
-            }
-        }
-        res.push(arr)
-    }
-    return res;
-}
-console.log('levelOrder1', levelOrder1(root));
 
 

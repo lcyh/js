@@ -56,7 +56,7 @@ let s1 = "(a(b(c)d)"
 let s2 = ")(("
 let s3 = "a)b(c)d"
 // console.log(minRemoveToMakeValid(s));
-console.log('/[a-z]+/',/[a-z]+/.test('aa'));
+console.log('/[a-z]+/', /[a-z]+/.test('aa'));
 
 function remove(s) {
     const remove = [];
@@ -81,4 +81,27 @@ function remove(s) {
     // console.log('res', res);
     return res;
 }
-console.log('remove', remove(s3));
+
+function remove2(s) {
+    const stack = []
+    const reg = /[a-z]+/;
+    for (let i = 0; i < s.length; i++) {
+        if (!reg.test(s[i])) {
+            if (s[i] === '(') {
+                stack.push(i);
+            } else {
+                if (stack.length) {
+                    stack.pop()
+                } else {
+                    stack.push(i)
+                }
+            }
+        }
+    }
+    let res = s.split('').filter((item, index) => {
+        return !stack.includes(index)
+    });
+    res = res.join('')
+    return res;
+}
+console.log('remove', remove(s));

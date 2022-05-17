@@ -5,7 +5,7 @@
 输入：s = "abaccdeff"
 输出：'b'
 
-输入：nums = 'eeeeee
+输入：nums = 'eeeeee'
 输出：' '
 
 输入：s = "" 

@@ -16,10 +16,10 @@
 解释: 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。
 
  */
-let s = "a good   example";
-s = s.trim()
-s = s.replace(/\s+/g,',')
-console.log('s',s);
+// let s = "a good   example";
+// s = s.trim()
+// s = s.replace(/\s+/g, ',')
+// console.log('s', s);
 
 var reverseWords = function (s) {
     let i = 0, len = s.length, j = 0, arr = [];
@@ -40,7 +40,7 @@ var reverseWords = function (s) {
     return arr.join(' ');
 };
 let str = 'a good   example'
-// console.log('reverseWords:', reverseWords(str));
+console.log('reverseWords:', reverseWords(str));
 
 
 function reverseStr(s) {
@@ -58,4 +58,19 @@ function reverseStr(s) {
     }
     return arr.join(' ')
 }
-console.log('reverseStr:', reverseStr('a good   example'));
+// console.log('reverseStr:', reverseStr('a good   example'));
+
+
+function reverseStr2(s) {
+    s = s.trim()
+    let arr = s.split(' ')
+    let i = 0;
+    let j = arr.length - 1;
+    while (i <= j) {
+        [arr[i], arr[j]] = [arr[j], arr[i]]
+        i++
+        j--
+    }
+    return arr.join(' ');
+}
+console.log('reverseStr2:', reverseStr2('a good   example'));

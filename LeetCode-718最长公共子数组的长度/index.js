@@ -26,8 +26,7 @@
   (j) 
  */
 var findLength = function (nums1, nums2) {
-    // 切记生成二位矩阵的时候，不要用,因为是生成的 num2 的数组是同一个引用
-    // const dp = Array(nums1.length).fill(() => Array(nums2.length).fill(0))
+    // const dp = Array(nums1.length).fill(Array(nums2.length).fill(0))
     const dp = Array.from(Array(nums1.length), () => Array(nums2.length).fill(0));
     let max = 0
     for (let i = 0; i < nums1.length; i++) {

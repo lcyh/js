@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function _const(data, value) {
+            // <!-- 全局window 挂在data -->
+            window.data = value;
+            Object.defineProperty(window, data, {
+                enumerable: false, // 遍历时是不能 枚举属性出来的
+                configurable: false, // 不能对改属性 删除和修改
+                get: function () {
+                    return value
+                },
+                set: function (data) {
+                    if (data !== value) {
+                        throw new TypeError("Assagement to constant variable")
+                    } else {
+                        return value
+                    }
+                }
+            })
+        }
+
+        // <!--测试用例-->
+        _const("a", { age: 18 })
+        console.log(a);
+        a.age = 201
+        a.name = 'lc'
+        a = { 'key':1}
+        console.log(a);
+
+
+    </script>
+</body>
+
+</html>

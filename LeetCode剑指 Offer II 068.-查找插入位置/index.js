@@ -31,7 +31,7 @@ var searchInsert = function (nums, target) {
     return i
 };
 var searchInsert1 = function (nums, target) {
-    let i = 0, j = nums.length - 1, cur = nums.length;
+    let i = 0, j = nums.length - 1;
     while (i <= j) {
         let midIndex = Math.floor((i + j) / 2);
         if (nums[midIndex] < target) {
@@ -44,5 +44,17 @@ var searchInsert1 = function (nums, target) {
     }
     return i
 };
-let nums = [1, 3, 5, 6], target = 7;
-console.log('searchInsert', searchInsert(nums, target));
+// let nums = [1, 3, 5, 6], target = 7;
+// console.log('searchInsert1', searchInsert1(nums, target));
+
+var searchInsert2 = function (nums, target) {
+    let j = nums.length;
+    for (let i = 0; i < j; i++) {
+        if (nums[i] >= target) {
+            return i
+        }
+    }
+    return j;
+}
+let nums = [1, 3, 5, 6], target = 5;
+console.log('searchInsert2', searchInsert2(nums, target));
