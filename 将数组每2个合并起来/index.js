@@ -19,4 +19,4 @@ function handleArr(arr, n = 2) {
     return res;
 }
 let arr1 = [1, 11, 2, 22, 3, 33, 4, 44];
-// console.log('handleArr', handleArr(arr1));
+console.log('handleArr', handleArr(arr1));
