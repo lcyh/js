@@ -20,30 +20,29 @@
  * @return {number}
  */
 var maxSubArray = function (nums) {
-    if (!nums.length) return []
-    if (nums.length === 1) return nums
-    let maxNum = nums[0]
-    let memo = [nums[0]]
-    for (let i = 1; i < nums.length; i++) {
-        memo[i] = Math.max(nums[i], nums[i] + memo[i - 1])
-        maxNum = Math.max(maxNum, memo[i])
-    }
-    return maxNum
+  if (!nums.length) return [];
+  if (nums.length === 1) return nums;
+  let maxNum = nums[0];
+  let memo = [nums[0]];
+  for (let i = 1; i < nums.length; i++) {
+    memo[i] = Math.max(nums[i], nums[i] + memo[i - 1]);
+    maxNum = Math.max(maxNum, memo[i]);
+  }
+  return maxNum;
 };
 
-let nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
-console.log('maxSubArray', maxSubArray(nums));
+let nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
+console.log("maxSubArray", maxSubArray(nums));
 
+var maxSub = function (arr) {
+  if (arr.length === 1) return arr[0];
+  let max = arr[0];
+  let memo = [arr[0]];
+  for (let i = 1; i < arr.length; i++) {
+    memo[i] = Math.max(arr[i] + memo[i - 1], arr[i]);
+    max = Math.max(memo[i], max);
+  }
+  return max;
+};
 
-var maxSub = function (nums) {
-    let max = nums[0];
-    let memo = [nums[0]];
-    for (let i = 1; i < nums.length; i++) {
-        memo[i] = Math.max(nums[i] + memo[i - 1], nums[i])
-        max = Math.max(memo[i], max)
-    }
-    console.log('max', max);
-    console.log('memo', memo);
-}
-
-console.log('maxSub', maxSub([5,4,-1,7,8]));
+console.log("maxSub", maxSub([5, 4, -1, 7, 8]));
