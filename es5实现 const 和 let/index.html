@@ -1,43 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <script>
-        function _const(data, value) {
-            // <!-- 全局window 挂在data -->
-            window.data = value;
-            Object.defineProperty(window, data, {
-                enumerable: false, // 遍历时是不能 枚举属性出来的
-                configurable: false, // 不能对改属性 删除和修改
-                get: function () {
-                    return value
-                },
-                set: function (data) {
-                    if (data !== value) {
-                        throw new TypeError("Assagement to constant variable")
-                    } else {
-                        return value
-                    }
-                }
-            })
+      // https://juejin.cn/post/6844903848008482824
+      // 如何在 ES5 环境下实现一个const ？
+      var __const = function __const(data, value) {
+        window.data = value; // 把要定义的data挂载到window下，并赋值value
+        Object.defineProperty(window, data, {
+          // 利用Object.defineProperty的能力劫持当前对象，并修改其属性描述符
+          enumerable: false,
+          configurable: false,
+          get: function () {
+            return value;
+          },
+          set: function (data) {
+            if (data !== value) {
+              // 当要对当前属性进行赋值时，则抛出错误！
+              throw new TypeError("Assignment to constant variable.");
+            } else {
+              return value;
+            }
+          },
+        });
+      };
+      __const("a", 10);
+      console.log(a);
+      delete a;
+      console.log(a);
+      for (let item in window) {
+        // 因为const定义的属性在global下也是不存在的，所以用到了enumerable: false来模拟这一功能
+        if (item === "a") {
+          // 因为不可枚举，所以不执行
+          console.log(window[item]);
         }
-
-        // <!--测试用例-->
-        _const("a", { age: 18 })
-        console.log(a);
-        a.age = 201
-        a.name = 'lc'
-        a = { 'key':1}
-        console.log(a);
-
-
+      }
+      a = 20; // 报错
     </script>
-</body>
-
+  </body>
 </html>

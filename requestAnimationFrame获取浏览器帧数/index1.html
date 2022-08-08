@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>屏幕刷新率</title>
-</head>
+  </head>
 
-<body>
-    <div id='root' style="width:100px;height:100px;color:red;"></div>
+  <body>
+    <div id="root" style="width: 100px; height: 100px; color: red"></div>
     <script>
-        let root = document.getElementById('root')
-        function getFps() {
-            const requestAnimationFrame = window.requestAnimationFrame || function (callback) { //Fallback function 
-                window.setTimeout(callback, 1000 / 60);
-            };
-            let fps = 0;
-            let previous = Date.now();
-            // let offset = 0;
-            const step = () => {
-                const now = Date.now();
-                // offset = now - previous;
-                fps++
-                if ((now - previous) >= 1000) {
-                    console.log('屏幕刷新率', fps);
-                    root.innerHTML = fps
-                    fps = 0;
-                    previous = now
-                }
-                requestAnimationFrame(step)
-            }
-            step()
-        }
-        getFps()
+      let root = document.getElementById("root");
+      function getFps() {
+        const requestAnimationFrame =
+          window.requestAnimationFrame ||
+          function (callback) {
+            //Fallback function
+            window.setTimeout(callback, 1000 / 60);
+          };
+        let fps = 0;
+        let previous = Date.now();
+        // let offset = 0;
+        const step = () => {
+          const now = Date.now();
+          // offset = now - previous;
+          fps++;
+          if (now - previous >= 1000) {
+            console.log("屏幕刷新率", fps);
+            root.innerHTML = fps;
+            fps = 0;
+            previous = now;
+          }
+          requestAnimationFrame(step);
+        };
+        step();
+      }
+      getFps();
     </script>
-</body>
-
+  </body>
 </html>
