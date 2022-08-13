@@ -19,19 +19,17 @@
           };
         let fps = 0;
         let previous = Date.now();
-        // let offset = 0;
-        const step = () => {
-          const now = Date.now();
-          // offset = now - previous;
+        function step() {
+          let now = Date.now();
           fps++;
           if (now - previous >= 1000) {
-            console.log("屏幕刷新率", fps);
+            console.log("fps", fps);
             root.innerHTML = fps;
             fps = 0;
             previous = now;
           }
           requestAnimationFrame(step);
-        };
+        }
         step();
       }
       getFps();
