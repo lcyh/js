@@ -1,105 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>截流防抖</title>
-</head>
+  </head>
 
-<body>
-    <div style="width:100%;height:100%;border:1px solid #000;">
-        <h1>防抖截流</h1>
-        <div id="content" style="width:100%;height:200px;font-size: 20px;"></div>
+  <body>
+    <div style="width: 100%; height: 100%; border: 1px solid #000">
+      <h1>防抖截流</h1>
+      <div
+        id="content"
+        style="width: 100%; height: 200px; font-size: 20px"
+      ></div>
     </div>
     <script>
-        class Animal {
-            name = '动物'; // 实例属性
-            age = 0;// 实例属性
-            constructor(age, address) {
-                this.age = age;
-                console.log('constructor-this',this);
-                this.getAge = this.getAge.bind(this)
-            }
-            say() {
-                console.log('say', this instanceof Animal); //true
-                console.log('say-this', this); // Animal { name: '动物', age: 11, getAge: [Function: getAge] }
-                return this;
-            }
-            getName() { // 类Animal原型上的方法
-                return this.name;
-            }
-            getAge = () => { // 实例方法
-                console.log('getAge', this);
-                return this;
-            }
-            render() {
-                // return <p onClick="()=>this.getAge()"></p>
-            }
+      class Animal {
+        name = "动物"; // 实例属性
+        age = 0; // 实例属性
+        constructor(age, address) {
+          this.age = age;
+          console.log("constructor-this", this);
+          this.getAge = this.getAge.bind(this);
         }
-        let cat = new Animal(11, '上海');
-        console.log('class-getAge', cat.getAge()); // this =>  Animal { name: '动物', age: 11, getAge: [Function: getAge] }
-        console.log('class-say', cat.say()); // this => Animal { name: '动物', age: 11, getAge: [Function: getAge] }
+        say() {
+          console.log("say", this instanceof Animal); //true
+          console.log("say-this", this); // Animal { name: '动物', age: 11, getAge: [Function: getAge] }
+          return this;
+        }
+        getName() {
+          // 类Animal原型上的方法
+          return this.name;
+        }
+        getAge = () => {
+          // 实例方法
+          console.log("getAge", this);
+          return this;
+        };
+        render() {
+          // return <p onClick="()=>this.getAge()"></p>
+        }
+      }
+      let cat = new Animal(11, "上海");
+      console.log("cat.__proto__", cat.__proto__);
+      // 这些函数在 原型对象上
+      // cat.__proto__ =>  //constructor: class Animal
+      //getName: ƒ getName()
+      //render: render() { // return <p onClick="()=> {…}
+      //say: ƒ say()
+      console.log("class-getAge", cat.getAge()); // this =>  Animal { name: '动物', age: 11, getAge: [Function: getAge] }
+      console.log("class-say", cat.say()); // this => Animal { name: '动物', age: 11, getAge: [Function: getAge] }
 
-        let testObj = {
-            name: 'Tom',
-            age: 12,
-            getAge: () => {
-                console.log('getAge', this); // 浏览器里打印是  window对象
-                return 'getAge'
-            }
-        }
-        console.log('testObj',testObj.getAge());
+      let testObj = {
+        name: "Tom",
+        age: 12,
+        getAge: () => {
+          console.log("getAge", this); // 浏览器里打印是  window对象
+          return "getAge";
+        },
+      };
+      console.log("testObj", testObj.getAge());
 
-        // 防抖
-        let count = 0;
-        function handleUpdate(event) {
-            console.log('event', event);
-            document.getElementById('content').innerText = count++;
-        }
-        let debounceFn = debounce(handleUpdate, 1000);
-        // content.addEventListener('mousemove', debounceFn);
-        function debounce(fn, delay) {
-            let timerId = null;
-            return function () {
-                const context = this;
-                const args = [...arguments];
-                if (timerId) clearTimeout(timerId);
-                let callNow = !timerId;
-                timerId = setTimeout(() => {
-                    // fn.apply(context, args);
-                    timerId = null;
-                }, delay)
-                // 立即执行
-                if (callNow) {
-                    fn.apply(context, args);
-                }
-            }
-        }
+      // 防抖
+      let count = 0;
+      function handleUpdate(event) {
+        console.log("event", event);
+        document.getElementById("content").innerText = count++;
+      }
+      let debounceFn = debounce(handleUpdate, 1000);
+      // content.addEventListener('mousemove', debounceFn);
+      function debounce(fn, delay) {
+        let timerId = null;
+        return function () {
+          const context = this;
+          const args = [...arguments];
+          if (timerId) clearTimeout(timerId);
+          let callNow = !timerId;
+          timerId = setTimeout(() => {
+            // fn.apply(context, args);
+            timerId = null;
+          }, delay);
+          // 立即执行
+          if (callNow) {
+            fn.apply(context, args);
+          }
+        };
+      }
 
-        // 截流
-        content.addEventListener('mousemove', throttle(handleUpdate, 2000))
-        function throttle(fn, delay) {
-            // 时间戳版
-            let prev = Date.now();
-            // 定时器版
-            let timerId = null;
-            return function () {
-                const context = this;
-                const args = arguments;
-                // if (Date.now() - prev > delay) {
-                //     fn.call(context, args);
-                //     prev = Date.now();
-                // }
-                if (!timerId) {
-                    timerId = setTimeout(() => {
-                        fn.call(context, arguments);
-                        timerId = null;
-                    }, delay)
-                }
-            }
-        }
+      // 截流
+      content.addEventListener("mousemove", throttle(handleUpdate, 2000));
+      function throttle(fn, delay) {
+        // 时间戳版
+        let prev = Date.now();
+        // 定时器版
+        let timerId = null;
+        return function () {
+          const context = this;
+          const args = arguments;
+          // if (Date.now() - prev > delay) {
+          //     fn.call(context, args);
+          //     prev = Date.now();
+          // }
+          if (!timerId) {
+            timerId = setTimeout(() => {
+              fn.call(context, arguments);
+              timerId = null;
+            }, delay);
+          }
+        };
+      }
     </script>
-</body>
-
+  </body>
 </html>

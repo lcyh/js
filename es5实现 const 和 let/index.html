@@ -10,9 +10,9 @@
     <script>
       // https://juejin.cn/post/6844903848008482824
       // 如何在 ES5 环境下实现一个const ？
-      var __const = function __const(data, value) {
-        window.data = value; // 把要定义的data挂载到window下，并赋值value
-        Object.defineProperty(window, data, {
+      var __const = function __const(key, value) {
+        window.key = value; // 把要定义的key挂载到window下，并赋值value
+        Object.defineProperty(window, key, {
           // 利用Object.defineProperty的能力劫持当前对象，并修改其属性描述符
           enumerable: false,
           configurable: false,

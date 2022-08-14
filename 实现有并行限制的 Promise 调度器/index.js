@@ -18,62 +18,83 @@
  */
 
 class Scheduler {
-    constructor(limit) {
-        this.queue = [];
-        this.maxRun = limit;
-        this.runningCounts = 0;
+  constructor(limit) {
+    this.queue = [];
+    this.maxRun = limit;
+    this.runningCounts = 0;
+  }
+  add(time, order) {
+    const promiseFn = () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(order);
+        }, time);
+      });
+    };
+    this.queue.push(promiseFn);
+  }
+  start() {
+    for (let i = 0; i < this.maxRun; i++) {
+      this.request();
     }
-    add(time, order) {
-        const promiseFn = () => {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve(order);
-                }, time)
-            })
-        }
-        this.queue.push(promiseFn)
+  }
+  request() {
+    if (
+      !this.queue ||
+      !this.queue.length ||
+      this.runningCounts >= this.maxRun
+    ) {
+      return;
     }
-    start() {
-        for (let i = 0; i < this.maxRun; i++) {
-            this.request()
-        }
-    }
-    request() {
-        if (!this.queue || !this.queue.length || this.runningCounts >= this.maxRun) {
-            return;
-        }
-        this.runningCounts++
-        const firstFn = this.queue.shift();
-        firstFn().then((res) => {
-            this.runningCounts--;
-            console.log(res);
-            this.request();
-        })
-    }
+    this.runningCounts++;
+    const firstFn = this.queue.shift();
+    firstFn().then((res) => {
+      this.runningCounts--;
+      console.log(res);
+      this.request();
+    });
+  }
 }
-let schedulerInstance = new Scheduler(2);
+
+class Scheduler2 {
+  constructor(limit) {
+    this.limit = limit;
+    this.runningCounts = 0;
+    this.queue = [];
+  }
+  add(time, order) {
+    const promiseFn = () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(order);
+          console.log("order", order);
+        }, time);
+      });
+    };
+    if (this.runningCounts < this.limit) {
+      this.request(promiseFn);
+    } else {
+      this.queue.push(promiseFn);
+    }
+  }
+  request(promiseFn) {
+    this.runningCounts++;
+    promiseFn().then(() => {
+      this.runningCounts--;
+      if (this.queue.length > 0) {
+        const fn = this.queue.shift();
+        this.request(fn);
+      }
+    });
+  }
+}
+let schedulerInstance = new Scheduler2(2);
 const addTask = (time, order) => {
-    schedulerInstance.add(time, order);
-}
-addTask(1000, '1');
-addTask(500, '2');
-addTask(300, '3');
-addTask(400, '4');
+  schedulerInstance.add(time, order);
+};
+addTask(1000, "1");
+addTask(500, "2");
+addTask(300, "3");
+addTask(400, "4");
 
-schedulerInstance.start(); // 2,3,1,4
-
-
-
-function promiseFn(time,order){
-    return new Promise((resolve)=>{
-        setTimeout(()=>{
-            resolve(order)
-        },time)
-    })
-}
-function task(){
-    promiseFn(3000,'hello').then(res=>{
-        console.log('res',res);
-    })
-}
-task()
+// schedulerInstance.start(); // 2,3,1,4

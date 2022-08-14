@@ -19,4 +19,17 @@ function add(...args) {
   //   };
   return fn;
 }
-console.log("add(1)(2)(3)()", add(1)(2)(3)()); // 6
+// console.log("add(1)(2)(3)()", add(1)(2)(3)()); // 6
+
+function add2(...args) {
+  let res = [...args];
+  const inner = (...innerArgs) => {
+    res.push(...innerArgs);
+    if (!innerArgs.length) {
+      return res.reduce((pre, cur) => pre + cur);
+    }
+    return inner;
+  };
+  return inner;
+}
+console.log("add2(1)(2)(3)(4)()", add2(1)(2)(3)(4)()); // 6
