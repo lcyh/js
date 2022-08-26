@@ -1,6 +1,6 @@
 /*
  * @Description: 归并排序--时间复杂度 nlog(n)
- 题目描述:实现一个时间复杂度为 nlog(n)的排序算法
+ 题目描述:实现一个时间复杂度为 nlog(n)的排序算法，二分查找(logn) + for循环(o(n)) -》嵌套关系-》O(nlogn)
  */
 // merge合并两个有序数组并排序
 function merge(left, right) {

@@ -9,24 +9,24 @@ head = [0,1,2], k = 4
 输出：[2,0,1]
  */
 let root = {
-  val: '1',
+  val: "1",
   next: {
-    val: '2',
+    val: "2",
     next: {
-      val: '3',
+      val: "3",
       next: {
-        val: '4',
+        val: "4",
         next: {
-          val: '5',
-          next: null
-        }
-      }
-    }
-  }
-}
+          val: "5",
+          next: null,
+        },
+      },
+    },
+  },
+};
 function ListNode(val, next) {
-  this.val = (val === undefined ? 0 : val)
-  this.next = (next === undefined ? null : next)
+  this.val = val === undefined ? 0 : val;
+  this.next = next === undefined ? null : next;
 }
 /**
  * @param {ListNode} head
@@ -42,31 +42,41 @@ var rotateRight = (head, k) => {
   let cur = head;
   // 获取链表的长度
   while (cur.next !== null) {
-    cur = cur.next;// 此时 cur在链表的尾节点
-    len++
+    cur = cur.next; // 此时 cur在链表的尾节点
+    len++;
   }
-  if ((k % len) === 0) return head;// 说明 k是len的倍数,直接返回原链表
+  if (k % len === 0) return head; // 说明 k是len的倍数,直接返回原链表
   // 连成环形链表
   cur.next = head;
   // cur走到尾节点(拆环的位置),需要走 num 步数
-  let num = len - k;// 5 - 2 = 3
+  let num = len - k; // 5 - 2 = 3
   while (num) {
-    cur = cur.next // 循环结束后,cur走到了拆环的位置(尾节点)
-    num--
+    cur = cur.next; // 循环结束后,cur走到了拆环的位置(尾节点)
+    num--;
   }
   let res = cur.next; // 记录头节点
-  cur.next = null // 拆环
+  cur.next = null; // 拆环
   return res;
-}
-console.log('rotateRight', JSON.stringify(rotateRight(root, 2), null, 2));
+};
+// console.log("rotateRight", JSON.stringify(rotateRight(root, 2), null, 2));
 
-
-const str = '123'
-// str = 12; // 报错Assignment to constant variable.
-let obj = {
-  name:'111',
-  age:'12',
-  adress:{
-    email:'hh'
+const fn = (head, k) => {
+  if (head === null || k === 0) return head;
+  let len = 1;
+  let cur = head;
+  while (cur.next) {
+    cur = cur.next;
+    len++;
   }
-}
+  if (k % len === 0) return head;
+  cur.next = head; // 形成环形链表
+  let num = len - k;
+  while (num) {
+    cur = cur.next;
+    num--;
+  }
+  let res = cur.next;
+  cur.next = null;
+  return res;
+};
+console.log("fn", JSON.stringify(fn(root, 2), null, 2));
